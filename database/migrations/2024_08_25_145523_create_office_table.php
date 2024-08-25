@@ -14,14 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('office', function (Blueprint $table) {
-            // $table->primary('id');
-            $table->primary('officeCode');
+            $table->string('officeCode', length:10)->primary();
             $table->string('city');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('addressLine1');
             $table->string('addressLine2');
             $table->string('state');
-            $table->integer('postalCode');
+            $table->string('postalCode');
             $table->string('territory');
             $table->timestamps();
         });

@@ -4,8 +4,8 @@ generate tables  in the following order
 offices 
 employees
 customer
-product
 productLine
+product
 orders
 orderdetails
 payments
