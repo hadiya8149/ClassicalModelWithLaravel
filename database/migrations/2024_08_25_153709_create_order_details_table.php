@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_details', function (Blueprint $table) {
-            $table->integer('orderNumber');
-            $table->string('productCode', length:50);
+            $table->string('orderNumber');
+            $table->string('productCode');
             $table->integer('quantityOrdered');
             $table->integer('priceEach');
             $table->foreign('orderNumber')->references('orderNumber')->on('order');

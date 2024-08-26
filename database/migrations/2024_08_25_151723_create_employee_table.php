@@ -14,21 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employee', function (Blueprint $table) {
-            $table->integer('employeeNumber')->primary();
+            $table->string('employeeNumber')->primary();
             $table->string('lastName', length:15);
             $table->string('firstName', length:15);
             $table->string('extension', length:10);
-            $table->string('email', length:100)->unique();
+            $table->string('email', length:100);
             $table->string('officeCode', length:10);
-            $table->integer('reportsTo');
-            $table->string('jobTitle', length:50);
+            $table->string('reportsTo')->nullable();
+            $table->string('jobTitle');
             $table->foreign('officeCode')->references('officeCode')->on('office');
             $table->timestamps();
         });
-        Schema::table('employee', function(Blueprint $table){
-            $table->foreign('reportsTo')->references('employeeNumber')->on('employee');
+        // Schema::table('employee', function(Blueprint $table){
+        //     $table->foreign('reportsTo')->references('employeeNumber')->on('employee');
             
-        });
+        // });
     }
 
     /**

@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
-            $table->integer('orderNumber')->primary();
+            $table->string('orderNumber')->primary();
             $table->date('orderDate');
             $table->date('requiredDate');
             $table->date('shippedDate');
             $table->string('status', length:15);
             $table->text('comments');
-            $table->integer('customerNumber');
+            $table->string('customerNumber');
             $table->foreign('customerNumber')->references('customerNumber')->on('customer');
             $table->timestamps();
         });

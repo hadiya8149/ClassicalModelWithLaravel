@@ -1,6 +1,6 @@
 classical model database 
 Step by Step guide 
-generate tables  in the following order
+generate tables  in the following 
 offices 
 employees
 customer

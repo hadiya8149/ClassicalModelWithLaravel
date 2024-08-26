@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('payment', function (Blueprint $table) {
-            $table->integer('customerNumber');
+            $table->string('customerNumber');
             $table->string('checkNumber',length:50);
             $table->date('paymentDate');
             $table->double('amount');

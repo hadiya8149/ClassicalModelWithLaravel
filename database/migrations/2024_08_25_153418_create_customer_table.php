@@ -14,18 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customer', function (Blueprint $table) {
-            $table->integer('customerNumber')->primary();
-            $table->string('customerName', length:50);
-            $table->string('contactLastName', length:50);
-            $table->string('contactFirstName', length:50);
-            $table->string("phone", length:15);
-            $table->string('addressLine1', length:50);
-            $table->string('addressLine2', length:50);
-            $table->string('city', length:50);
-            $table->string('state', length:50);
-            $table->string('postalCode', length:50);
-            $table->string('country', length:50);
-            $table->integer('salesRepEmployeeNumber');
+            $table->string('customerNumber')->primary();
+            $table->string('customerName');
+            $table->string('contactLastName');
+            $table->string('contactFirstName');
+            $table->string("phone");
+            $table->string('addressLine1');
+            $table->string('addressLine2');
+            $table->string('city');
+            $table->string('state');
+            $table->string('postalCode');
+            $table->string('country');
+            $table->string('salesRepEmployeeNumber');
             $table->double('creditLimit');
             $table->foreign('salesRepEmployeeNumber')->references('employeeNumber')->on('employee');
             $table->timestamps();

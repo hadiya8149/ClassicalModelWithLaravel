@@ -19,13 +19,13 @@ return new class extends Migration
             $table->string('productLine', length:50);
             $table->string('productVendor', length:50);
             $table->text('productDescription');
-            $table->integer('quanityInStock');
+            $table->integer('quantityInStock');
             $table->integer('buyPrice');
             $table->double('MSRP');
+            // $table->foreign('productLine')->references('productLine')->on('product_line');
+
             $table->timestamps();
-        });
-        Schema::table('product', function(Blueprint $table){
-            $table->foreign('productLine')->references('productLine')->on('product_line');
+
         });
     }
 
