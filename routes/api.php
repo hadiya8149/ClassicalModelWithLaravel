@@ -24,20 +24,29 @@ use App\Http\Controllers\PaymentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/customer', [CustomerController::class, 'index']);
+Route::get('/productDetails', [ProductsController::class, 'productsWithDescription']);
+
 Route::get('/customers-assigned-sales-rep', [CustomerController::class, 'showCustomersAlongWithAssignedSalesRep']);
 
-Route::get('/employee', [EmployeeController::class, 'index']);
-Route::get('/offices', [OfficeController::class, 'index']);
-Route::get('/offices/{state}', [OfficeController::class, 'show']);
-Route::get('/productlines', [ProductsLineController::class, 'index']);
-Route::get('/productDetails', [ProductsController::class, 'productsWithDescription']);
 Route::get('/orders/{customerId}', [OrdersController::class, 'showOrdersBySpecificCustomer']);
+
+
 Route::get('/order-details/{orderid}',[OrderDetailsController::class, 'showOrderDetailsByOrderNumber']);
+
+
 Route::get('/payment-by-customer/{customerNumber}', [PaymentController::class, 'showTotalPaymentByCustomer']);
+
 Route::get('/employees-by-office/{officeCode}', [EmployeeController::class, 'showEmployeesByOffice']);
+
+Route::get('/products-in-stock', [ProductsController::class, 'productsInStock']);
+
 Route::get('/highest-credit-limit', [CustomerController::class, 'highestCreditLimit']);
+
 Route::get('/pending-orders', [OrdersController::class, 'showPendingOrders']);
+
 Route::get('/payment-by-date', [PaymentController::class, 'showPaymentsByDateRange']);
+Route::get('/products-in-productline', [ProductsLineController::class, 'showProductsByProductsLine']);
 Route::get('/no-of-orders-placed', [OrdersController::class, 'getNumberOfOrdersByEachCustomer']);
+Route::get('/offices/{state}', [OfficeController::class, 'show']);
+Route::get('/total-quantity-ordered', [OrderDetailsController::class, 'totalQuantityOrdered']);
 Route::get('/list-of-customers-with-orders', [OrdersController::class, 'getNumberOfOrdersByEachCustomer']);

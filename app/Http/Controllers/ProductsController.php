@@ -8,15 +8,6 @@ use App\Models\Products;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
 
 /**
@@ -24,9 +15,17 @@ class ProductsController extends Controller
  */
     public function productsWithDescription(){
         $result = Products::with('productLines')->get();
+        // dd($result);
         return response()->json(
             ['data'=>$result]   
         );
     }
+    public function productsInStock(){
+        $products = Products::where('quantityInStock','>','1')->get();
+        return response()->json([
+            'data'=>$products
+        ]);
+    }
+
     
 }

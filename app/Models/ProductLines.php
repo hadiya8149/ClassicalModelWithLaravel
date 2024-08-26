@@ -14,8 +14,11 @@ class ProductLines extends Model
     protected $table = 'product_lines';
     protected $primaryKey='productLine';
     protected $fillable = ['productLine', 'textDescription', 'htmlDescription', 'photo'];
+    protected $keyType='string';
+    public $incrementing=false;
     public function products()
     {
         return $this->hasMany(Products::class, 'productLine');
     }
+    
 }

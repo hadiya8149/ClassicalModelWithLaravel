@@ -7,12 +7,17 @@ use App\Models\OrderDetails;
 class OrderDetailsController extends Controller
 {
     public function showOrderDetailsByOrderNumber($orderNumber){
-        $result  = OrderDetails::where('orderNumber','=',$orderNumber)->get();
+        $orderDetails  = OrderDetails::where('orderNumber','=',$orderNumber)->get();
         return response()->json(
             [
                 'status'=>200,
-                'data'=>$result
+                'data'=>$orderDetails
             ]
             );
     }
+    public function totalQuantityOrdered(){
+        $productCode = request()->input('product-code');
+        $totalQuantity = OrderDetails::where('productCode', $productCode)->sum('quantityOrdered');
+        return response()->json(['totalQuantityOrdered' => $totalQuantity]);
+        }
 }

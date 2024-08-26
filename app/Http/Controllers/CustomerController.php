@@ -19,8 +19,8 @@ class CustomerController extends Controller
         return $customers;
     }
     public function showCustomersAlongWithAssignedSalesRep(){
-        // $result = customer::with('employees')->get();
-        $result = Customer::join('employee', 'customer.salesRepEmployeeNumber','=', 'employee.employeeNumber')->get();
+        $result = customer::with('employees')->get();
+        // $result = Customer::join('employee', 'customer.salesRepEmployeeNumber','=', 'employee.employeeNumber')->get();
         return response()->json(
             [
                 'data'=>$result
@@ -28,10 +28,10 @@ class CustomerController extends Controller
             );
     }
     public function highestCreditLimit(){
-        $result = Customer::max('creditLimit');
+        $creditLimit = Customer::max('creditLimit');
         return response()->json(
             [
-                'highest credit limit'=>$result
+                'highest credit limit'=>$creditLimit
             ]
             );
 
