@@ -11,14 +11,16 @@ class OrderDetails extends Model
 {
     use HasFactory;
     protected $table = 'order_details';
+    protected $primaryKey = 'orderNumber';
+    protected $foreignKey = 'productCode';
 
     public function orders(): BelongsTo
     {
-        return $this->BelongsTo(Orders::class);
+        return $this->BelongsTo(Orders::class, 'orderNumber');
     }
 
     public function products(): BelongsTo
     {
-        return $this->BelongsTo(Products::class);
+        return $this->BelongsTo(Products::class, 'productCode');
     }
 }

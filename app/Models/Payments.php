@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Payments extends Model
 {
     use HasFactory;
-    protected $table = 'payment';
+    protected $table = 'payments';
+    
     
     public function customers(): BelongsTo
     {
-        return $this->BelongsTo(customer::class);
+        return $this->BelongsTo(customer::class, 'customerNumber');
     }
 }

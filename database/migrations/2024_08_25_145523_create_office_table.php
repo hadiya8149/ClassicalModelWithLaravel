@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('office', function (Blueprint $table) {
+        Schema::create('offices', function (Blueprint $table) {
             $table->string('officeCode', length:10)->primary();
             $table->string('city');
             $table->string('phone');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('office');
+        Schema::dropIfExists('offices');
     }
 };

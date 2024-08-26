@@ -15,7 +15,8 @@ class CustomerFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition()
-    {
+{
+
         return [
             'customerNumber' => fake()->uuid(),
             'customerName' => fake()->company(),

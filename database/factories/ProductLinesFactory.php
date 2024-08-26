@@ -18,7 +18,7 @@ class ProductLinesFactory extends Factory
     {
         $productlines =  ['Classical Cars', 'motorcycles', 'bikes', 'luxury cars', 'watches', 'accessories', 'perfumes', 'sports cars', 'sports bike', 'bicycle', 'wheels', 'rings', 'bracelets'];
         return [
-        'productLine'=>$productlines[array_rand($productlines, 1)],
+        'productLine'=>fake()->bothify('?????'),
         'textDescription'=>fake()->paragraph,
         'htmlDescription'=>fake()->realText(200, 3),
         // 'image'=>fake()->image(public_path('images'), 640, 480)

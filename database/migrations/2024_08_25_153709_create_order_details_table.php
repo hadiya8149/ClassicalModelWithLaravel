@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('productCode');
             $table->integer('quantityOrdered');
             $table->integer('priceEach');
-            $table->foreign('orderNumber')->references('orderNumber')->on('order');
-            $table->foreign('productCode')->references('productCode')->on('product');
+            $table->foreign('orderNumber')->references('orderNumber')->on('orders');
+            $table->foreign('productCode')->references('productCode')->on('products');
             $table->primary( ['orderNumber', 'productCode']);
             $table->timestamps();
         });

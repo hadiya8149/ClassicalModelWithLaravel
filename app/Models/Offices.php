@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Offices extends Model
 {
     use HasFactory;
-    protected $table = 'office';
-    
+    protected $table = 'offices';
+    protected $primaryKey = 'officeCode';
 
     /// include relatoinships
     public function employees(): HasMany
     {
-        return $this->HasMany(Employee::class);
+        return $this->HasMany(Employee::class, 'officeCode');
 
     }
 }

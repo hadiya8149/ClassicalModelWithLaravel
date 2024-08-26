@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->string('customerNumber');
             $table->string('checkNumber',length:50);
             $table->date('paymentDate');
             $table->double('amount');
-            $table->foreign('customerNumber')->references('customerNumber')->on('customer');
+            $table->foreign('customerNumber')->references('customerNumber')->on('customers');
             
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment');
+        Schema::dropIfExists('payments');
     }
 };

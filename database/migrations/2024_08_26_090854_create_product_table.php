@@ -13,20 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->string('productCode', length:50)->primary();
-            $table->string('productName', length:50);
+        Schema::create('products', function (Blueprint $table) {
+            $table->string('productCode')->primary();
+            $table->string('productName');
             $table->string('productLine', length:50);
-            $table->string('productVendor', length:50);
+            $table->string('productVendor');
             $table->text('productDescription');
             $table->integer('quantityInStock');
             $table->integer('buyPrice');
             $table->double('MSRP');
-            // $table->foreign('productLine')->references('productLine')->on('product_line');
-
+            $table->foreign('productLine')->references('productLine')->on('product_lines');
             $table->timestamps();
-
         });
+
     }
 
     /**
@@ -39,6 +38,6 @@ return new class extends Migration
         Schema::table('product', function(Blueprint $table){
             $table->dropColumn('productCode');
         });
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('products');
     }
 };

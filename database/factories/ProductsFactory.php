@@ -14,10 +14,11 @@ class ProductsFactory extends Factory
     public function definition()
     {
         return [
+            // to get rid of the error seed manually by giving productline
             'productCode'=>fake()->uuid(),
-            'productName'=>fake()->word(),
-            'productLine'=>\App\Models\ProductLines::inRandomOrder()->first()->productLine,
-            'productVendor'=>fake()->word(),
+            'productName'=>fake()->word,
+            'productLine'=>'bikes',
+            'productVendor'=>fake()->word,
             'productDescription'=>fake()->paragraph,
             'quantityInStock'=>rand(100,1000),
             'buyPrice'=>rand(1000,10000),

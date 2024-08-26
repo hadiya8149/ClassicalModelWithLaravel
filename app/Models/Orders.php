@@ -10,18 +10,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Orders extends Model
 {
     use HasFactory;
-    protected $table = 'order';
-
+    protected $table = 'orders';
+    protected $primaryKey = 'orderNumber';
+    protected $foreignKey='customerNumber';
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public function customers(): BelongsTo
     {
-        return $this->BelongsTo(Orders::class);
+        return $this->BelongsTo(Orders::class, 'customerNumber');
     }
     
     
     public function OrderDetails(): HasMany
     {
-        return $this->HasMany(OrderDetails::class);
+        return $this->HasMany(OrderDetails::class, 'orderNumber');
     }
 
 

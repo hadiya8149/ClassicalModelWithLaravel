@@ -8,23 +8,28 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Models\Customer;
 
-
-class employee extends Model
+class Employee extends Model
 {
     use HasFactory;
     // set table name @string
-    protected $table = 'employee';
+    protected $table = 'employees';
+    protected $fillable = ['employeeNumber', 'lastName', 'firstName', 'email'];
+
     protected $nullable = ['reportsTo'];
+    protected $primaryKey='employeeNumber';
+    protected $keyType='string';
+    public $incrementing = false;
     /*
         get customers related to the employee
     */
-    public function customers(): HasMany
+    public function customers()
     {
-        return $this->HasMany(customer::class);
+        return $this->hasMany(Customer::class, 'salesRepEmployeeNumber', 'employeeNumber');
     }
     public function offices(): BelongsTo
     {
-        return $this->BelongsTo(office::class);
+        return $this->BelongsTo(office::class, 'officeCode');
     }
 }

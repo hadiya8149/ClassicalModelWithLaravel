@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->string('customerNumber')->primary();
             $table->string('customerName');
             $table->string('contactLastName');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('salesRepEmployeeNumber');
             $table->double('creditLimit');
-            $table->foreign('salesRepEmployeeNumber')->references('employeeNumber')->on('employee');
+            $table->foreign('salesRepEmployeeNumber')->references('employeeNumber')->on('employees');
             $table->timestamps();
         });
     }
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('customers');
     }
 };

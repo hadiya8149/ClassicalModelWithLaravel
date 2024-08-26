@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\customer;
+use App\Models\employee;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -17,70 +18,23 @@ class CustomerController extends Controller
         $customers = customer::all();
         return $customers;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function showCustomersAlongWithAssignedSalesRep(){
+        // $result = customer::with('employees')->get();
+        $result = Customer::join('employee', 'customer.salesRepEmployeeNumber','=', 'employee.employeeNumber')->get();
+        return response()->json(
+            [
+                'data'=>$result
+            ]
+            );
     }
+    public function highestCreditLimit(){
+        $result = Customer::max('creditLimit');
+        return response()->json(
+            [
+                'highest credit limit'=>$result
+            ]
+            );
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(customer $customer)
-    {
-        //
-    }
+    
 }

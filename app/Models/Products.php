@@ -11,15 +11,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Products extends Model
 {
     use HasFactory;
-    protected $table='product';
+    protected $table='products';
+    protected $primaryKey = 'productCode';
     protected $fillable  = ['productCode', 'productName', 'productLine', 'productVendor', 'productDescription', 'quanityinStocks', 'buyPrice', 'MSRP'];
-    
+    protected $foreignKey='productLine';
+    protected $keyType = 'string';
+    public $incrementing = false;
     public function orderDetails(): HasMany
     {
-        return $this->HasMany(OrderDetails::class);
+        return $this->HasMany(OrderDetails::class, 'productCode');
     }
-    public function productlines(): BelongsTo
+    public function productLines()
     {
-        return $this->BelongsTo(ProductLines::class);
+        return $this->belongsTo(ProductLines::class, 'productLine');
     }
 }

@@ -14,6 +14,6 @@ class ProductLinesSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\ProductLines::factory()->count(13)->create();
+        \App\Models\ProductLines::factory()->count(6)->create();
     }
 }

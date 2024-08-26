@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->string('orderNumber')->primary();
             $table->date('orderDate');
             $table->date('requiredDate');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('status', length:15);
             $table->text('comments');
             $table->string('customerNumber');
-            $table->foreign('customerNumber')->references('customerNumber')->on('customer');
+            $table->foreign('customerNumber')->references('customerNumber')->on('customers');
             $table->timestamps();
         });
     }
@@ -33,6 +33,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order');
+
+        Schema::dropIfExists('orders');
     }
 };

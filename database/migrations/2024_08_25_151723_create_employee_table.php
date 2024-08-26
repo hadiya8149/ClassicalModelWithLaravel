@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employee', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->string('employeeNumber')->primary();
             $table->string('lastName', length:15);
             $table->string('firstName', length:15);
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('officeCode', length:10);
             $table->string('reportsTo')->nullable();
             $table->string('jobTitle');
-            $table->foreign('officeCode')->references('officeCode')->on('office');
+            $table->foreign('officeCode')->references('officeCode')->on('offices');
             $table->timestamps();
         });
         // Schema::table('employee', function(Blueprint $table){
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee');
+        Schema::dropIfExists('employees');
     }
 };

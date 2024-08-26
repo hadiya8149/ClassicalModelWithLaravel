@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ProductLines extends Model
 {
     use HasFactory;
-    protected $table = 'product_line';
-    public function products(): HasMany
+    protected $table = 'product_lines';
+    protected $primaryKey='productLine';
+    protected $fillable = ['productLine', 'textDescription', 'htmlDescription', 'photo'];
+    public function products()
     {
-        return $this->HasMany(ProductLines::class);
+        return $this->hasMany(Products::class, 'productLine');
     }
 }

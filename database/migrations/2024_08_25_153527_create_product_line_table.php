@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_line', function (Blueprint $table) {
-            $table->string('productLine', length:50);
+        Schema::create('product_lines', function (Blueprint $table) {
+            $table->string('productLine', length:50)->primary();
             $table->text('textDescription');
             $table->mediumText('htmlDescription');
             $table->binary('photo');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_line');
+        Schema::dropIfExists('product_lines');
     }
 };
