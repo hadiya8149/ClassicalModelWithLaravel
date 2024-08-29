@@ -17,13 +17,13 @@ class ProductsLineController extends Controller
 
     public function showProductsByProductsLine(){
         $productLine = request()->input('productLine');
-        $products = ProductLines::join('products', 'product_lines.productLine','=','products.productLine')
-        ->where('product_lines.productLine','=',$productLine)->get();
+        $products = ProductLines::with('products')
+        ->where('productLine','=',$productLine)->get();
         return response()->json(
             [
                 'data'=>$products
             ]
         );
 
-    }
+    }    
 }

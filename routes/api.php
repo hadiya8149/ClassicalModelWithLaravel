@@ -21,32 +21,38 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::controller(ProductsController::class)->group(function (){
+    Route::get('/productDetails',  'productsWithDescription');
+    Route::get('/products-in-stock',  'productsInStock');
+    Route::get('/products-in-productline', 'showProductsByProductsLine');
 });
-Route::get('/productDetails', [ProductsController::class, 'productsWithDescription']);
 
-Route::get('/customers-assigned-sales-rep', [CustomerController::class, 'showCustomersAlongWithAssignedSalesRep']);
+Route::controller(CustomerController::class)->group(function (){
+    Route::get('/customers-assigned-sales-rep', 'showCustomersAlongWithAssignedSalesRep');
+    Route::get('/highest-credit-limit', 'highestCreditLimit');
 
-Route::get('/orders/{customerId}', [OrdersController::class, 'showOrdersBySpecificCustomer']);
+});
 
+Route::controller(OrdersController::class)->group(function (){
+    Route::get('/orders/{customerId}',  'showOrdersBySpecificCustomer');
+    Route::get('/list-of-customers-with-orders', 'getNumberOfOrdersByEachCustomer');
+    Route::get('/pending-orders','showPendingOrders');
+    Route::get('/no-of-orders-placed', 'getNumberOfOrdersByEachCustomer');
 
-Route::get('/order-details/{orderid}',[OrderDetailsController::class, 'showOrderDetailsByOrderNumber']);
+});
 
+Route::controller(OrderDetailsController::class)->group(function(){
+    Route::get('/order-details/{orderid}','showOrderDetailsByOrderNumber');
+    Route::get('/total-quantity-ordered',  'totalQuantityOrdered');
 
-Route::get('/payment-by-customer/{customerNumber}', [PaymentController::class, 'showTotalPaymentByCustomer']);
+});
+
+Route::controller(PaymentController::class)->group(function(){
+    Route::get('/payment-by-customer/{customerNumber}', 'showTotalPaymentByCustomer');
+    Route::get('/payment-by-date', 'showPaymentsByDateRange');
+
+});
 
 Route::get('/employees-by-office/{officeCode}', [EmployeeController::class, 'showEmployeesByOffice']);
-
-Route::get('/products-in-stock', [ProductsController::class, 'productsInStock']);
-
-Route::get('/highest-credit-limit', [CustomerController::class, 'highestCreditLimit']);
-
-Route::get('/pending-orders', [OrdersController::class, 'showPendingOrders']);
-
-Route::get('/payment-by-date', [PaymentController::class, 'showPaymentsByDateRange']);
-Route::get('/products-in-productline', [ProductsLineController::class, 'showProductsByProductsLine']);
-Route::get('/no-of-orders-placed', [OrdersController::class, 'getNumberOfOrdersByEachCustomer']);
 Route::get('/offices/{state}', [OfficeController::class, 'show']);
-Route::get('/total-quantity-ordered', [OrderDetailsController::class, 'totalQuantityOrdered']);
-Route::get('/list-of-customers-with-orders', [OrdersController::class, 'getNumberOfOrdersByEachCustomer']);

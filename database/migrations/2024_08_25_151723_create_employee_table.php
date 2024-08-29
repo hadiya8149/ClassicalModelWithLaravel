@@ -25,10 +25,10 @@ return new class extends Migration
             $table->foreign('officeCode')->references('officeCode')->on('offices');
             $table->timestamps();
         });
-        // Schema::table('employee', function(Blueprint $table){
-        //     $table->foreign('reportsTo')->references('employeeNumber')->on('employee');
+        Schema::table('employee', function(Blueprint $table){
+            $table->foreign('reportsTo')->references('employeeNumber')->on('employee');
             
-        // });
+        });
     }
 
     /**

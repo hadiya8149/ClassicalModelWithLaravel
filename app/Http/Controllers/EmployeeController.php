@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\employee;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -20,8 +19,8 @@ class EmployeeController extends Controller
     }
     
     public function showEmployeesByOffice($officeCode){
-        $result = Employee::join('office', 'employee.officeCode','=', 'office.officeCode')
-        ->where('office.officeCode', $officeCode)
+        $result = Employee::with('offices')
+        ->where('officeCode', $officeCode)
         ->get();
         return response()->json(
             [

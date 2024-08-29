@@ -25,9 +25,9 @@ class OrdersController extends Controller
         );
     }
     public function getNumberOfOrdersByEachCustomer(){
-        $numOfOrders = Orders::join('customer', 'order.customerNumber', '=', 'customer.customerNumber')
-        ->groupBy('customer.customerNumber')
-        ->selectRaw('customer.customerNumber,  count(order.customerNumber)')
+        $numOfOrders = Orders::with('customers')
+        ->groupBy('customerNumber')
+        ->selectRaw('customerNumber,  count(orders.customerNumber)')
         ->get();
         return response()->json(
             [

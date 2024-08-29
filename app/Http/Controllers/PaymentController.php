@@ -7,9 +7,9 @@ use App\Models\Payments;
 class PaymentController extends Controller
 {
     public function showTotalPaymentByCustomer($customerNumber){
-        $totalPayment = Payments::join('customer', 'payment.customerNumber', '=', 'customer.customerNumber')
-        ->where('customer.customerNumber', $customerNumber)
-        ->sum('payment.amount');
+        $totalPayment = Payments::with('customers')
+        ->where('customerNumber', $customerNumber)
+        ->sum('amount');
         return response()->json(
             [
                 'status'=>200,
