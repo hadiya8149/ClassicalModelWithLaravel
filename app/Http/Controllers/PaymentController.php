@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Payments;
 class PaymentController extends Controller
 {
-    public function showTotalPaymentByCustomer($customerNumber){
+    public function showTotalPaymentByCustomer($customerNumber)
+    {
         $totalPayment = Payments::with('customers')
         ->where('customerNumber', $customerNumber)
         ->sum('amount');
@@ -17,7 +18,8 @@ class PaymentController extends Controller
             ]
             );
     }
-    public function showPaymentsByDateRange(){
+    public function showPaymentsByDateRange()
+    {
         $startDate= request()->input('startDate');
         $endDate = request()->input('endDate');
         $payments = Payments::whereBetween('paymentDate', [$startDate, $endDate])->get();

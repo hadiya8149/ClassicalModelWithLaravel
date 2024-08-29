@@ -39,7 +39,6 @@ Route::controller(OrdersController::class)->group(function (){
     Route::get('/list-of-customers-with-orders', 'getNumberOfOrdersByEachCustomer');
     Route::get('/pending-orders','showPendingOrders');
     Route::get('/no-of-orders-placed', 'getNumberOfOrdersByEachCustomer');
-
 });
 
 Route::controller(OrderDetailsController::class)->group(function(){

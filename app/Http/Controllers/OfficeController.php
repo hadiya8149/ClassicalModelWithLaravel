@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 class OfficeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $offices = Offices::all();
@@ -19,7 +14,9 @@ class OfficeController extends Controller
         ]);
 
     }
-
+/**
+ * show offices that are in particular state
+ */
     public function show($state)
     {
         $offices = Offices::where('state','=',$state)->get();

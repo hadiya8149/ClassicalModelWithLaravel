@@ -15,7 +15,8 @@ class ProductsLineController extends Controller
         );
     }
 
-    public function showProductsByProductsLine(){
+    public function showProductsByProductsLine()
+    {
         $productLine = request()->input('productLine');
         $products = ProductLines::with('products')
         ->where('productLine','=',$productLine)->get();

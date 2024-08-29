@@ -8,26 +8,26 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $customers = customer::all();
         return $customers;
     }
-    public function showCustomersAlongWithAssignedSalesRep(){
+
+
+    public function showCustomersAlongWithAssignedSalesRep()
+    {
         $result = customer::with('employees')->get();
-        // $result = Customer::join('employee', 'customer.salesRepEmployeeNumber','=', 'employee.employeeNumber')->get();
         return response()->json(
             [
                 'data'=>$result
             ]
             );
     }
-    public function highestCreditLimit(){
+
+    public function highestCreditLimit()
+    {
         $creditLimit = Customer::max('creditLimit');
         return response()->json(
             [
@@ -35,6 +35,5 @@ class CustomerController extends Controller
             ]
             );
 
-    }
-    
+    }    
 }

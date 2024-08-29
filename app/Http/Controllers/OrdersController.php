@@ -8,7 +8,8 @@ use App\Models\Orders;
 
 class OrdersController extends Controller
 {
-    public function showOrdersBySpecificCustomer($id){
+    public function showOrdersBySpecificCustomer($id)
+    {
         $orders = Orders::where('customerNumber','=', $id)->get();
         return response()->json(
             [
@@ -16,7 +17,9 @@ class OrdersController extends Controller
             ]
             );
     }
-    public function showPendingOrders(){
+
+    public function showPendingOrders()
+    {
         $pendingOrders = Orders::where('status','=','processing')->get();
         return response()->json(
             [
@@ -24,7 +27,9 @@ class OrdersController extends Controller
             ]
         );
     }
-    public function getNumberOfOrdersByEachCustomer(){
+    
+    public function getNumberOfOrdersByEachCustomer()
+    {
         $numOfOrders = Orders::with('customers')
         ->groupBy('customerNumber')
         ->selectRaw('customerNumber,  count(orders.customerNumber)')
