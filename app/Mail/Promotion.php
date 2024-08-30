@@ -15,10 +15,13 @@ class Promotion extends Mailable
 
     /**
      * Create a new message instance.
-     *
+ .    *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        public string $content,
+        public $subject
+    )
     {
         //
     }
@@ -31,8 +34,8 @@ class Promotion extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from:'mailtrap@example.com',
-            subject: 'Promotion',
+            from:'mailtrap@demomailtrap.com',
+            subject: $this->subject,
         );
     }
 
