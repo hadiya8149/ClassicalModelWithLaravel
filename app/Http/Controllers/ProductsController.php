@@ -6,27 +6,31 @@ use Illuminate\Http\Request;
 
 use App\Models\Products;
 
+use App\Helpers\Helpers;
+
+use App\Services\ProductsService;
 class ProductsController extends Controller
 {
-
-
 /**
  * Display all products along with their product lines
  */
+    private ProductsService $productService;
+    public function __construct(ProductsService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     public function productsWithDescription()
     {
-        $result = Products::with('productLines')->get();
-        // dd($result);
-        return response()->json(
-            ['data'=>$result]   
-        );
+        $data = $this->productService->productsWithDescription();
+        return Helpers::sendJsonResponse(200, 'Product with product lines description', $data);
     }
+
+
     public function productsInStock()
     {
-        $products = Products::where('quantityInStock','>','1')->get();
-        return response()->json([
-            'data'=>$products
-        ]);
+        $data = $this->productService->productsInStock();
+        return Helpers::sendJsonResponse(200, 'Product in stock', $data);
     }
 
     

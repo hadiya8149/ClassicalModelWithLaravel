@@ -25,12 +25,12 @@ use App\Http\Controllers\PaymentController;
 Route::controller(ProductsController::class)->group(function (){
     Route::get('/productDetails',  'productsWithDescription');
     Route::get('/products-in-stock',  'productsInStock');
-    Route::get('/products-in-productline', 'showProductsByProductsLine');
 });
 
 Route::controller(CustomerController::class)->group(function (){
     Route::get('/customers-assigned-sales-rep', 'showCustomersAlongWithAssignedSalesRep');
     Route::get('/highest-credit-limit', 'highestCreditLimit');
+    Route::get('/all-customers', 'index');
 
 });
 
@@ -42,8 +42,8 @@ Route::controller(OrdersController::class)->group(function (){
 });
 
 Route::controller(OrderDetailsController::class)->group(function(){
-    Route::get('/order-details/{orderid}','showOrderDetailsByOrderNumber');
-    Route::get('/total-quantity-ordered',  'totalQuantityOrdered');
+    Route::get('/order-details/{orderid?}','showOrderDetailsByOrderNumber');
+    Route::get('/total-quantity-ordered/{productCode?}',  'totalQuantityOrdered');
 
 });
 
@@ -53,5 +53,11 @@ Route::controller(PaymentController::class)->group(function(){
 
 });
 
-Route::get('/employees-by-office/{officeCode}', [EmployeeController::class, 'showEmployeesByOffice']);
-Route::get('/offices/{state}', [OfficeController::class, 'show']);
+Route::get('/employees-by-office', [EmployeeController::class, 'showEmployeesByOffice'])->name('employees.byOffice');
+//{} used for path, use for identifying a resource
+// query parameters used for filtering resources 
+
+Route::get('/offices/state', [OfficeController::class, 'showOfficesByState'])->name('offices.byState');
+Route::get('/offices', [OfficeController::class, 'index']);
+
+Route::get('/products-in-productline/{productLine?}', [ProductsLineController::class, 'showProductsByProductsLine']);
