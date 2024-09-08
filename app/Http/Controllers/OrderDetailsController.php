@@ -11,7 +11,7 @@ use App\Helpers\Helpers;
 
 class OrderDetailsController extends Controller
 {
-    private OrderDetailsService $orderDetailsService;
+    private  $orderDetailsService;
     
     public function __construct(OrderDetailsService $orderDetailsService)
     {

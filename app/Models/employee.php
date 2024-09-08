@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-use App\Models\Customer;
 
 class Employee extends Model
 {
@@ -30,6 +29,6 @@ class Employee extends Model
     }
     public function offices(): BelongsTo
     {
-        return $this->BelongsTo(office::class, 'officeCode');
+        return $this->BelongsTo(offices::class, 'officeCode');
     }
 }

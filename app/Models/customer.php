@@ -17,7 +17,7 @@ class Customer extends Model
     public $incrementing = false;
     public function employees()
     {
-        return $this->belongsTo(Employee::class, 'salesRepEmployeeNumber', 'customerNumber');
+        return $this->belongsTo(Employee::class, 'salesRepEmployeeNumber');
     }
 
     public function payments(): HasMany

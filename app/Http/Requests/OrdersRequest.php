@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class OfficesRequest extends FormRequest
+class OrdersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,24 +25,14 @@ class OfficesRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->routeIs('offices.byState')){
-
-            return [
-                'state'=>'required|exists:offices,state'
-            ];
-        }
-
-        if($this->routeIs('employees.byOffice')){
-            return [
-                'officeCode'=>'required|exists:offices,officeCode'
-            ];
-        }
-    }
-    public function messages()
-    {
         return [
-            'state.required'=>'State is required.',
-            'state.exists'=>'State not found'
+            'customerNumber'=>'required|exists:customers,customerNumber'
+        ];
+    }
+    public function messages(){
+        return [
+            'customerNumber.required'=>'Customer Number is required',
+            'customerNumber.exits'=>'Customer does not exists'
         ];
     }
     protected function failedValidation(Validator $validator)
@@ -52,4 +43,5 @@ class OfficesRequest extends FormRequest
         ]);
         throw new HttpResponseException($response);
     }
+
 }

@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customer;
-use App\Models\employee;
 use Illuminate\Http\Request;
 use App\Helpers\Helpers;
+use App\Services\CustomersService;
 class CustomerController extends Controller
 {
 
+    private  $customerService;
+    
+    public function __construct(CustomersService $customerService)
+    {
+        $this->customerService = $customerService;
+    }
+
     public function index()
     {
-        $customers = customer::query()->paginate(10);
+        $customers = $this->customerService->index();
         return Helpers::sendJsonResponse(200, 'List of all Customers', $customers);
 
     }
@@ -19,14 +25,13 @@ class CustomerController extends Controller
 
     public function showCustomersAlongWithAssignedSalesRep()
     {
-        $result = customer::with('employees')->get()->paginate(10);
+        $result = $this->customerService->showCustomersAlongWithAssignedSalesRep();
         return Helpers::sendJsonResponse(200, 'Customers list along with their assigned sales representatives', $result);
     }
 
     public function highestCreditLimit()
     {
-        $creditLimit = Customer::max('creditLimit');
-        $result = ['highest credit limit'=>$creditLimit];
-        return Helpers::sendJsonResponse(200, 'Customer with the highest credit limit',$result);
+        $data = $this->customerService->highestCreditLimit();
+        return Helpers::sendJsonResponse(200, 'Customer with the highest credit limit',$data);
     }    
 }

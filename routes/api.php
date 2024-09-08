@@ -25,6 +25,7 @@ use App\Http\Controllers\PaymentController;
 Route::controller(ProductsController::class)->group(function (){
     Route::get('/productDetails',  'productsWithDescription');
     Route::get('/products-in-stock',  'productsInStock');
+    Route::get('/products', 'showAllProducts');
 });
 
 Route::controller(CustomerController::class)->group(function (){
@@ -35,21 +36,21 @@ Route::controller(CustomerController::class)->group(function (){
 });
 
 Route::controller(OrdersController::class)->group(function (){
-    Route::get('/orders/{customerId}',  'showOrdersBySpecificCustomer');
+    Route::get('/orders/customer',  'showOrdersBySpecificCustomer');
     Route::get('/list-of-customers-with-orders', 'getNumberOfOrdersByEachCustomer');
     Route::get('/pending-orders','showPendingOrders');
     Route::get('/no-of-orders-placed', 'getNumberOfOrdersByEachCustomer');
 });
 
 Route::controller(OrderDetailsController::class)->group(function(){
-    Route::get('/order-details/{orderid?}','showOrderDetailsByOrderNumber');
-    Route::get('/total-quantity-ordered/{productCode?}',  'totalQuantityOrdered');
+    Route::get('/order-details','showOrderDetailsByOrderNumber');
+    Route::get('/total-quantity-ordered',  'totalQuantityOrdered');
 
 });
 
 Route::controller(PaymentController::class)->group(function(){
-    Route::get('/payment-by-customer/{customerNumber}', 'showTotalPaymentByCustomer');
-    Route::get('/payment-by-date', 'showPaymentsByDateRange');
+    Route::get('/payment-by-customer', 'showTotalPaymentByCustomer')->name('totalpayments.byCustomer');
+    Route::get('/payment-by-date', 'showPaymentsByDateRange')->name('allPayments.byDateRange');
 
 });
 

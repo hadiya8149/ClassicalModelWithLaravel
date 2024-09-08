@@ -4,24 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Payments;
-use App\Helpers;
+use App\Helpers\Helpers;
+use App\Http\Requests\PaymentsRequest;
+use App\Services\PaymentsService;
 class PaymentController extends Controller
 {
-    public function showTotalPaymentByCustomer($customerNumber)
+    private  $paymentsService;
+    
+    public function __construct(PaymentsService $paymentsService)
     {
-        $totalPayment = Payments::with('customers')
-        ->where('customerNumber', $customerNumber)
-        ->sum('amount');
-        $result = ['Total Payment'=>$totalPayment];
-        return Helpers::sendJsonResponse(200, 'Total payments made by the customer', $result);
+
+        $this->paymentsService = $paymentsService;
     }
-    public function showPaymentsByDateRange()
+    public function showTotalPaymentByCustomer(PaymentsRequest $request)
     {
-        $startDate= request()->input('startDate');
-        $endDate = request()->input('endDate');
-        $payments = Payments::whereBetween('paymentDate', [$startDate, $endDate])->get()->paginate(10);
-        $message = "Payments from " . $startDate ." to " . $endDate;
-        return Helpers::sendJsonResponse(200,$message, $payments);
+        $customerNumber = $request->customerNumber;
+        $data = $this->paymentsService->showTotalPaymentByCustomer($customerNumber);
+        return Helpers::sendJsonResponse(200, 'Total payments made by the customer', $data);
+    }
+    public function showPaymentsByDateRange(PaymentsRequest $request)
+    {
+        $startDate= $request->startDate;
+        $endDate = $request->endDate;
+        $data = $this->paymentsService->showPaymentsByDateRange($startDate, $endDate);
+        return Helpers::sendJsonResponse(200,$message, $data);
     }    
 
 }

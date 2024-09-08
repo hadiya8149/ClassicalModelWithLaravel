@@ -33,5 +33,9 @@ class ProductsController extends Controller
         return Helpers::sendJsonResponse(200, 'Product in stock', $data);
     }
 
-    
+    public function showAllProducts(){
+        $data = $this->productService->showAllProducts();
+        return Helpers::sendJsonResponse(200, 'Products', $data);
+    }
+
 }

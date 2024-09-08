@@ -3,30 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\OrdersRequest;
+use App\Helpers\Helpers;
 use App\Models\Orders;
-use App\Helpers;
+use App\Services\OrdersService;
 
 class OrdersController extends Controller
 {
-    public function showOrdersBySpecificCustomer($id)
+    private  $ordersService;
+    
+    public function __construct(OrdersService $ordersService)
     {
-        $orders = Orders::where('customerNumber','=', $id)->get()->paginate(10);
-        return Helpers::sendJsonResponse(200, 'List of all orders made by the customer', $orders);
+
+        $this->ordersService = $ordersService;
+    }
+
+    public function showOrdersBySpecificCustomer(OrdersRequest $request)
+    {
+        $id = $request->customerNumber;
+        $data = $this->ordersService->showOrdersBySpecificCustomer($id);
+        return Helpers::sendJsonResponse(200, 'List of all orders made by the customer', $data);
     }
 
     public function showPendingOrders()
     {
-        $pendingOrders = Orders::where('status','=','processing')->get()->paginage(10);
-        return Helpers::sendJsonResponse(200, 'List of all pending orders', $pendingOrders);
+        $data = $this->ordersService->showPendingOrders();
+        return Helpers::sendJsonResponse(200, 'List of all pending orders', $data);
     }
     
     public function getNumberOfOrdersByEachCustomer()
     {
-        $numOfOrders = Orders::with('customers')
-        ->groupBy('customerNumber')
-        ->selectRaw('customerNumber,  count(orders.customerNumber)')
-        ->get()->paginate(10);
+        $numOfOrders = $this->ordersService->getNumberOfOrdersByEachCustomer();
         return Helpers::sendJsonResponse(200, 'Number of orders by each customer', $numOfOrders);
     }
 }
