@@ -2,13 +2,6 @@
 
 namespace App\Jobs;
 
-// use Illuminate\Bus\Queueable;
-// use Illuminate\Contracts\Queue\ShouldBeUnique;
-// use Illuminate\Contracts\Queue\ShouldQueue;
-// use Illuminate\Foundation\Bus\Dispatchable;
-// use Illuminate\Queue\InteractsWithQueue;
-// use Illuminate\Queue\SerializesModels;
-
 
 use App\Mail\Promotion;
 use Illuminate\Bus\Queueable;
@@ -43,10 +36,10 @@ class SendBulkEmailJob implements ShouldQueue
     {
         $emailContent = $this->data['content'];
         $subject = $this->data['subject'];
-        $emailList = $this->data['emails'];
+        // $emailList = $this->data['emails'];
 
-        foreach ($emailList as $email) {
-            Mail::to($email->email)->send(new Promotion($emailContent, $subject));
-        }
+        // for ($x=0;$x<3;$x++) {/
+            Mail::to("hadiya8149@gmail.com")->send(new Promotion($emailContent, $subject));
+        // }
     }
 }

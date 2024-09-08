@@ -32,7 +32,7 @@ class SendBulkEmails extends Command
     public function handle()
     {
         $users = User::query()->select('email')->get();
-        $data['emails']=$users;
+        // $data['emails']=$users;
         $data['subject']="Newsletter Email";
         $data['content'] = "This is a newsletter email.";
         SendBulkEmailJob::dispatch($data);

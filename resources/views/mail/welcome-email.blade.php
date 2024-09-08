@@ -99,7 +99,6 @@
         </div>
 <div class="content-block">
     <div>
-        <h1>Welcome {{user}} on e-commerce platform. </h1>
     </div>
 <div class="products d-flex align-items-center justify-content-center">
     
