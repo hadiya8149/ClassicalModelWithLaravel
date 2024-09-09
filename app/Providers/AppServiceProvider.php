@@ -14,6 +14,16 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
+		$this->app->bind(
+			\App\Interfaces\TestServiceInterface::class,
+			\App\Services\TestService::class
+		);
+
+		$this->app->bind(
+			\App\Interfaces\TestServiceInterface::class,
+			\App\Services\TestService::class
+		);
     }
 
     /**

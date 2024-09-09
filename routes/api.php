@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\OrderDetailsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +22,9 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
+
+Route::post('/login', [UserController::class, 'login']);
+Route::post('/signup', [UserController::class, 'store']);
 
 Route::controller(ProductsController::class)->group(function (){
     Route::get('/productDetails',  'productsWithDescription');
@@ -62,3 +66,4 @@ Route::get('/offices/state', [OfficeController::class, 'showOfficesByState'])->n
 Route::get('/offices', [OfficeController::class, 'index']);
 
 Route::get('/products-in-productline/{productLine?}', [ProductsLineController::class, 'showProductsByProductsLine']);
+

@@ -9,7 +9,7 @@ use App\Helpers\Helpers;
 class OfficeController extends Controller
 {
     private $officeService;
-    public function __construct(OfficeService $officeService)
+    public function __construct(OfficeService $officeService, TestService $testService)
     {
         $this->officeService = $officeService;
     }
@@ -17,6 +17,7 @@ class OfficeController extends Controller
     public function index()
     {
         $data = $this->officeService->showAllOffices();
+        
         return Helpers::sendJsonResponse(200, 'All offices', $data);
 
     }
